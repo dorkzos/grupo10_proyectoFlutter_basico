@@ -1,0 +1,80 @@
+# ============================================
+# DIRECTORIOS ESPECÍFICOS DE PLATAFORMAS
+# NO incluir en GitHub
+# ============================================
+android/
+ios/
+linux/
+macos/
+windows/
+web/
+
+# ============================================
+# DIRECTORIOS DE COMPILACIÓN Y BUILD
+# ============================================
+build/
+.dart_tool/
+.gradle/
+
+# ============================================
+# DIRECTORIOS DE IDE
+# ============================================
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# ============================================
+# ARCHIVOS DE LOCK Y CACHE
+# ============================================
+pubspec.lock
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/coverage/
+
+# ============================================
+# ARCHIVOS DEL SISTEMA
+# ============================================
+.DS_Store
+Thumbs.db
+*.class
+*.log
+*.pyc
+*.swp
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# ============================================
+# ARCHIVOS DE SÍMBOLOS Y OFUSCACIÓN
+# ============================================
+app.*.symbols
+app.*.map.json
+
+# ============================================
+# BUILD ARTIFACTS DE ANDROID STUDIO
+# ============================================
+/android/app/debug
+/android/app/profile
+/android/app/release
+**/ios/Flutter/.last_build_id
+
+# ============================================
+# ARCHIVOS TEMPORALES
+# ============================================
+*.swp
+*.swo
+*~
+.temp/
+
+# ============================================
+# VARIABLES DE ENTORNO
+# ============================================
+.env
+.env.local
