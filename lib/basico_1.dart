@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'emergencia.dart';
 
 class pantalla1 extends StatefulWidget {
   const pantalla1({super.key});
@@ -9,6 +11,37 @@ class pantalla1 extends StatefulWidget {
 
 class _pantalla1State extends State<pantalla1> {
   bool isPressed = false;
+  int countdown = 3;
+  Timer? timer;
+  bool timerActive = false;
+  bool countdownFinished = false;
+
+  void startCountdown() {
+    countdown = 3;
+    timerActive = true;
+
+    timer = Timer.periodic(Duration(seconds: 1), (Timer t) {
+      setState(() {
+        countdown--;
+      });
+
+      if (countdown <= 0) {
+        timer?.cancel();
+        timerActive = false;
+        setState(() {
+          countdownFinished = true;
+        });
+        print('¡LLAMAR A EMERGENCIAS!');
+        
+        Future.delayed(Duration(milliseconds: 500), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PantallaEmergencia()),
+          );
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +73,16 @@ class _pantalla1State extends State<pantalla1> {
                   setState(() {
                     isPressed = true;
                   });
+                  startCountdown();
                   print('inicio');
                 },
                 onLongPressEnd: (details) {
                   setState(() {
                     isPressed = false;
+                    countdownFinished = false;
                   });
+                  timer?.cancel();
+                  timerActive = false;
                   print('fin');
                 },
                 child: AnimatedScale(
@@ -64,10 +101,7 @@ class _pantalla1State extends State<pantalla1> {
           SizedBox(height: 50),
           Row(
             children: [
-              Expanded(
-                flex: 20,
-                child: SizedBox(),
-              ),
+              Expanded(flex: 20, child: SizedBox()),
               Expanded(
                 flex: 80,
                 child: Text(
@@ -76,14 +110,23 @@ class _pantalla1State extends State<pantalla1> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Expanded(
-                flex: 20,
-                child: SizedBox(),
-              ),
+              Expanded(flex: 20, child: SizedBox()),
             ],
           ),
+          if (countdownFinished)
+            SizedBox(height: 30),
+          if (countdownFinished)
+            Text(
+              '¡LLAMANDO A EMERGENCIAS!',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            ),
         ],
       ),
     );
   }
 }
+
