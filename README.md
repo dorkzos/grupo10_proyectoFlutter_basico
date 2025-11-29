@@ -19,7 +19,7 @@ Esta es la primera fase del proyecto de Seguridad Ciudadana. Consiste en una her
 
 | Integrante | Rol | GitHub |
 | :--- | :--- | :--- |
-| **Dorian Patrick Menendez Limo** | 👑 Líder | *Tu Usuario* |
+| **Dorian Patrick Menendez Limo** | 👑 Líder | *@Dorkzos* |
 | **Fernando Mauro Alarcon Fernandez** | 🎨 UI/UX | `@AlarconFernando` |
 | **Josué Bonifacio Chino Quispe** | 🎨 UI/UX | `@SHINO-DOS` |
 | **Sergio Alejandro Macias Quispe** | 💻 Dev | `@Alee1234em` |
