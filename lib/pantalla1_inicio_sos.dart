@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'emergencia.dart';
+import 'pantalla2_Llamando.dart';
 
 class pantalla1 extends StatefulWidget {
   const pantalla1({super.key});
@@ -15,6 +15,12 @@ class _pantalla1State extends State<pantalla1> {
   Timer? timer;
   bool timerActive = false;
   bool countdownFinished = false;
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
 
   void startCountdown() {
     countdown = 3;
@@ -31,13 +37,14 @@ class _pantalla1State extends State<pantalla1> {
         setState(() {
           countdownFinished = true;
         });
-        print('¡LLAMAR A EMERGENCIAS!');
         
         Future.delayed(Duration(milliseconds: 500), () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PantallaEmergencia()),
-          );
+          if (mounted) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Pantalla2Llamando()),
+            );
+          }
         });
       }
     });
@@ -47,23 +54,29 @@ class _pantalla1State extends State<pantalla1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Aplicación Básica: Botón de Pánico'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text('Botón de Pánico - SOS'),
+        backgroundColor: Colors.red,
+        centerTitle: true,
+        elevation: 5,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(width: 100, height: 50),
+          SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Botón de Pánico',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                'Sistema de Emergencia',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.red,
+                ),
               ),
             ],
           ),
-          SizedBox(width: 100, height: 70),
+          SizedBox(height: 60),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +87,6 @@ class _pantalla1State extends State<pantalla1> {
                     isPressed = true;
                   });
                   startCountdown();
-                  print('inicio');
                 },
                 onLongPressEnd: (details) {
                   setState(() {
@@ -83,7 +95,6 @@ class _pantalla1State extends State<pantalla1> {
                   });
                   timer?.cancel();
                   timerActive = false;
-                  print('fin');
                 },
                 child: AnimatedScale(
                   duration: Duration(milliseconds: 200),
@@ -98,7 +109,17 @@ class _pantalla1State extends State<pantalla1> {
               ),
             ],
           ),
-          SizedBox(height: 50),
+          SizedBox(height: 30),
+          if (timerActive)
+            Text(
+              countdown.toString(),
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+              ),
+            ),
+          if (timerActive) SizedBox(height: 20),
           Row(
             children: [
               Expanded(flex: 20, child: SizedBox()),
@@ -106,7 +127,11 @@ class _pantalla1State extends State<pantalla1> {
                 flex: 80,
                 child: Text(
                   'Mantén presionado por 3 segundos para llamar a emergencias',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey.shade700,
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ),

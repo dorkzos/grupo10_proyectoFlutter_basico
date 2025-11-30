@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'basico_1.dart';
+import 'pantalla1_inicio_sos.dart';
 
 void main() {
   runApp(const MainApp());
