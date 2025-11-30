@@ -1,7 +1,38 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
-class Pantalla2Llamando extends StatelessWidget {
+class Pantalla2Llamando extends StatefulWidget {
   const Pantalla2Llamando({super.key});
+
+  @override
+  State<Pantalla2Llamando> createState() => _Pantalla2LlamandoState();
+}
+
+class _Pantalla2LlamandoState extends State<Pantalla2Llamando> {
+  late Timer _pulseTimer;
+  bool _isPulsing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _startPulse();
+  }
+
+  void _startPulse() {
+    _pulseTimer = Timer.periodic(Duration(milliseconds: 800), (timer) {
+      if (mounted) {
+        setState(() {
+          _isPulsing = !_isPulsing;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pulseTimer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +65,14 @@ class Pantalla2Llamando extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
-                Icons.check_circle,
-                size: 150,
-                color: Colors.green,
+              AnimatedScale(
+                scale: _isPulsing ? 1.2 : 1.0,
+                duration: Duration(milliseconds: 400),
+                child: Icon(
+                  Icons.check_circle,
+                  size: 150,
+                  color: Colors.green.shade600,
+                ),
               ),
             ],
           ),

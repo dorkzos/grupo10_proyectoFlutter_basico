@@ -43,7 +43,11 @@ class _pantalla1State extends State<pantalla1> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Pantalla2Llamando()),
-            );
+            ).then((_) {
+              setState(() {
+                countdownFinished = false;
+              });
+            });
           }
         });
       }
@@ -54,7 +58,7 @@ class _pantalla1State extends State<pantalla1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Botón de Pánico - SOS'),
+        title: const Text('Botón de Pánico - SOS', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.red,
         centerTitle: true,
         elevation: 5,
